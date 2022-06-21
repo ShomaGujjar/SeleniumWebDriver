@@ -23,7 +23,8 @@
                 }
                 public static class Password
                 {
-
+                    public static string FourCharacters = "qwer";
+                    public static string ThirteenCharacters = "qwerHJHjhkjhk";
                 }
                 public static class Email
                 {
@@ -35,6 +36,8 @@
         public static class AlertMessages
         {
             public static string SuccessfulLogin = "Succesful login!";
+            public static string PasswordLengthOutOfRange = "Password should not be empty / length be between 5 to 12";
+            public static string UsernameLengthOutOfRange = "User Id should not be empty / length be between 5 to 12";
         }
     }
 }
