@@ -3,6 +3,8 @@ using OpenQA.Selenium;
 
 namespace AutomationTestingFramework.TestScenarios
 {
+    [Parallelizable]
+    //[Parallelizable(ParallelScope.None)] - to exclude the test from the Parallelizable scope
     public class LoginValidCredentials
     {
         IAlert _alert;
