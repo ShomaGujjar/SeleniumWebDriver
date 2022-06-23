@@ -1,8 +1,10 @@
-﻿namespace AutomationTestingFramework.UIElements
+﻿using OpenQA.Selenium;
+
+namespace AutomationTestingFramework.UIElements
 {
     public class RightSideBar
     {
-        public RightSideBar()
+        public RightSideBar(IWebDriver driver)
         {
 
         }

@@ -5,15 +5,15 @@ namespace AutomationTestingFramework.UIElements
 {
     public class LoginScenarioPost
     {
-        public LoginScenarioPost()
+        public LoginScenarioPost(IWebDriver driver)
         {
-            PageFactory.InitElements(Driver.driver,this);
+            PageFactory.InitElements(driver, this);
         }
 
-        [FindsBy(How=How.CssSelector,Using = "#post-72 > div > form > ul > li:nth-child(2) > input[type=text]")]
+        [FindsBy(How = How.CssSelector, Using = "#post-72 > div > form > ul > li:nth-child(2) > input[type=text]")]
         public IWebElement UserName { get; set; }
 
-        [FindsBy(How=How.CssSelector,Using = "#post-72 > div > form > ul > li:nth-child(4) > input[type=password]")]
+        [FindsBy(How = How.CssSelector, Using = "#post-72 > div > form > ul > li:nth-child(4) > input[type=password]")]
         public IWebElement Password { get; set; }
 
         [FindsBy(How = How.Name, Using = "repeatpassid")]

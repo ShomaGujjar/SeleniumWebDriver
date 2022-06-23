@@ -1,19 +1,22 @@
 ﻿using AutomationTestingFramework.UIElements;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
 namespace AutomationTestingFramework
 {
     public static class Actions
     {
-        public static void InitializeDriver()
+        public static IWebDriver InitializeDriver()
         {
-            Driver.driver = new ChromeDriver();
-            Driver.driver.Navigate().GoToUrl(Config.BaseURL);
+            IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl(Config.BaseURL);
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            return driver;
         }
 
-        public static void FillLoginForm(string userName, string password, string repeatPassword)
+        public static void FillLoginForm(string userName, string password, string repeatPassword, IWebDriver driver)
         {
-            LoginScenarioPost loginScenarioPost = new LoginScenarioPost();
+            LoginScenarioPost loginScenarioPost = new LoginScenarioPost(driver);
 
             loginScenarioPost.UserName.Clear();
             loginScenarioPost.Password.Clear();

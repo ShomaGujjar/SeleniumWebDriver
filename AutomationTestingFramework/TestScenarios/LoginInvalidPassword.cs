@@ -7,34 +7,46 @@ namespace AutomationTestingFramework.TestScenarios
     public class LoginInvalidPassword
     {
         IAlert _alert;
+        public IWebDriver Driver { get; set; }
 
         [OneTimeSetUp]
         public void Initialize()
         {
-            Actions.InitializeDriver();
-            NavidateTo.LoginFormThroughTheMainMenu();
+            Driver = Actions.InitializeDriver();
+            NavidateTo.LoginFormThroughTheMainMenu(Driver);
         }
 
         [Test]
         public void LessThan5Characters()
         {
-            Actions.FillLoginForm(Config.Credentials.Valid.UserName,
-                Config.Credentials.Invalid.Password.FourCharacters, Config.Credentials.Invalid.Password.FourCharacters);
+            try
+            {
+                Actions.FillLoginForm(Config.Credentials.Valid.UserName,
+                    Config.Credentials.Invalid.Password.FourCharacters,
+                    Config.Credentials.Invalid.Password.FourCharacters, Driver);
 
-            _alert = Driver.driver.SwitchTo().Alert();
+                _alert = Driver.SwitchTo().Alert();
 
-            Assert.AreEqual(Config.AlertMessages.PasswordLengthOutOfRange, _alert.Text);
+                Assert.AreEqual(Config.AlertMessages.PasswordLengthOutOfRange, _alert.Text);
 
-            _alert.Accept();
+                _alert.Accept();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
         }
 
         [Test]
         public void MoreThan12Characters()
         {
             Actions.FillLoginForm(Config.Credentials.Valid.UserName,
-                Config.Credentials.Invalid.Password.ThirteenCharacters, Config.Credentials.Invalid.Password.ThirteenCharacters);
+                Config.Credentials.Invalid.Password.ThirteenCharacters,
+                Config.Credentials.Invalid.Password.ThirteenCharacters, Driver);
 
-            _alert = Driver.driver.SwitchTo().Alert();
+            _alert = Driver.SwitchTo().Alert();
 
             Assert.AreEqual(Config.AlertMessages.PasswordLengthOutOfRange, _alert.Text);
 
@@ -45,7 +57,7 @@ namespace AutomationTestingFramework.TestScenarios
         [OneTimeTearDown]
         public void Cleanup()
         {
-            Driver.driver.Quit();
+            Driver.Quit();
         }
     }
 }

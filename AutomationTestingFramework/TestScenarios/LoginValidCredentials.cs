@@ -8,23 +8,24 @@ namespace AutomationTestingFramework.TestScenarios
     public class LoginValidCredentials
     {
         IAlert _alert;
+        public IWebDriver Driver { get; set; }
 
         [OneTimeSetUp]
         public void Initialize()
         {
-            Actions.InitializeDriver();
+            Driver = Actions.InitializeDriver();
         }
 
         [Test]
         public void ValidLogin()
         {
             //Navigate to login form through the Main Menu
-            NavidateTo.LoginFormThroughTheMainMenu();
+            NavidateTo.LoginFormThroughTheMainMenu(Driver);
 
             Actions.FillLoginForm(Config.Credentials.Valid.UserName,
-                Config.Credentials.Valid.Password, Config.Credentials.Valid.RepeatPassword);
+                Config.Credentials.Valid.Password, Config.Credentials.Valid.RepeatPassword, Driver);
 
-            _alert = Driver.driver.SwitchTo().Alert();
+            _alert = Driver.SwitchTo().Alert();
 
             Assert.AreEqual(Config.AlertMessages.SuccessfulLogin, _alert.Text);
 
@@ -35,7 +36,7 @@ namespace AutomationTestingFramework.TestScenarios
         [OneTimeTearDown]
         public void Cleanup()
         {
-            Driver.driver.Quit();
+            Driver.Quit();
         }
     }
 }

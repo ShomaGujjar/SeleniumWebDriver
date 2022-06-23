@@ -5,9 +5,9 @@ namespace AutomationTestingFramework.UIElements
 {
     public class UserNameFieldPost
     {
-        public UserNameFieldPost()
+        public UserNameFieldPost(IWebDriver driver)
         {
-            PageFactory.InitElements(Driver.driver, this);
+            PageFactory.InitElements(driver, this);
         }
 
         [FindsBy(How = How.CssSelector, Using = "#post-74 > div > p > a")]

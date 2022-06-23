@@ -7,21 +7,22 @@ namespace AutomationTestingFramework.TestScenarios
     public class LoginInvalidUsername
     {
         IAlert _alert;
+        public IWebDriver Driver { get; set; }
 
         [OneTimeSetUp]
         public void Initialize()
         {
-            Actions.InitializeDriver();
-            NavidateTo.LoginFormThroughTheMainMenu();
+            Driver = Actions.InitializeDriver();
+            NavidateTo.LoginFormThroughTheMainMenu(Driver);
         }
 
         [Test]
         public void LessThan5Characters()
         {
             Actions.FillLoginForm(Config.Credentials.Invalid.UserName.FourCharacters,
-                Config.Credentials.Valid.Password, Config.Credentials.Valid.RepeatPassword);
+                Config.Credentials.Valid.Password, Config.Credentials.Valid.RepeatPassword, Driver);
 
-            _alert = Driver.driver.SwitchTo().Alert();
+            _alert = Driver.SwitchTo().Alert();
 
             Assert.AreEqual(Config.AlertMessages.UsernameLengthOutOfRange, _alert.Text);
 
@@ -32,9 +33,9 @@ namespace AutomationTestingFramework.TestScenarios
         public void MoreThan12Characters()
         {
             Actions.FillLoginForm(Config.Credentials.Invalid.UserName.ThirteenCharacters,
-                Config.Credentials.Valid.Password, Config.Credentials.Valid.RepeatPassword);
+                Config.Credentials.Valid.Password, Config.Credentials.Valid.RepeatPassword, Driver);
 
-            _alert = Driver.driver.SwitchTo().Alert();
+            _alert = Driver.SwitchTo().Alert();
 
             Assert.AreEqual(Config.AlertMessages.UsernameLengthOutOfRange, _alert.Text);
 
@@ -45,7 +46,7 @@ namespace AutomationTestingFramework.TestScenarios
         [OneTimeTearDown]
         public void Cleanup()
         {
-            Driver.driver.Quit();
+            Driver.Quit();
         }
     }
 }
