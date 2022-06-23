@@ -1,4 +1,5 @@
 # SeleniumWebDriver for .Net 6
+Based on the Udemy Selenium course by Tod Vachev
 
 ## Command to run nunit3-consolerunner
 Install the dotnet core console runner using the following nuget command:
